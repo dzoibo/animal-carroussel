@@ -8,7 +8,7 @@ const data = [
 ];
   
   const thumbnail = document.querySelector('.thumbnail');
-  
+
   data.forEach(item => {
     const div = document.createElement('div');
     div.className = 'item';
@@ -36,3 +36,41 @@ const data = [
   
     thumbnail.appendChild(div);
   });
+
+  //Animation
+  let nextBtn =document.getElementById('next');
+  let prevBtn = document.getElementById('prev');
+  let carouselDom = document.querySelector('.carousel');
+  let listDom = document.querySelector('.carousel .list');
+  let thumbnailDom = document.querySelector('.carousel .thumbnail');
+  
+  nextBtn.addEventListener("click",()=>{
+    showSlider("next");
+  });
+
+  prevBtn.addEventListener("click",()=>{
+    showSlider("prev")
+  });
+
+  let timeRunning = 1500;
+  let runTimeOut;
+  function showSlider(type){
+    let itemSlider = document.querySelectorAll('.carousel .list .item');
+    let itemThumbnail = document.querySelectorAll('.carousel .thumbnail .item');
+    if(type ==='next'){
+        listDom.appendChild(itemSlider[0]);
+        thumbnailDom.appendChild(itemThumbnail[0]);
+        carouselDom.classList.add('next');
+    }else{
+        let positionLastItem = itemSlider.length - 1;
+        listDom.prepend(itemSlider[positionLastItem]);
+        thumbnailDom.prepend(itemThumbnail[positionLastItem]);
+        carouselDom.classList.add('prev');
+    }
+
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
+        carouselDom.classList.remove('next');
+        carouselDom.classList.remove('prev');
+    },timeRunning)
+  }
