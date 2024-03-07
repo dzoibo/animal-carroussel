@@ -61,7 +61,7 @@ header a{
 
 .carousel .list .item .content{
   position: absolute;
-  top: 20%;
+  top: 10%;
   width: 1140px;
   max-width: 80%;
   left: 50%;
@@ -78,7 +78,7 @@ header a{
 } 
 .carousel .list .item .title,
 .carousel .list .item .topic{
-  font-size: 5em;
+  font-size: 3.5em;
   font-weight: bold;
   line-height: 1.3em;
 }
@@ -116,7 +116,8 @@ header a{
   gap: 20px;
 }
 .thumbnail .item{
-  width: 180px;
+  min-width: 160px;
+  width: 160px;
   height: 220px;
   flex-shrink: 0;
   position: relative;
@@ -155,6 +156,9 @@ header a{
   gap: 10px;
   align-items: center;
 }
+.des{
+  max-width: 500px;
+}
 .arrows button{
   width: 40px;
   height: 40px;
@@ -187,7 +191,7 @@ header a{
   transform: translateY(50px);
   filter: blur(20px);
   opacity: 0;
-  animation: showContent 0.5s 1.5s linear 1 forwards;
+  animation: showContent 0.5s 1s linear 1 forwards;
 }
 @keyframes showContent{
   to{
@@ -257,7 +261,7 @@ header a{
 
 /* running time */
 
-.carousel .time{
+ .time{
   position: absolute;
   z-index: 1000;
   width: 0%;
@@ -269,11 +273,11 @@ header a{
 
 .carousel.next .time,
 .carousel.prev .time{
-  animation: runningTime 3s linear 1 forwards;
+  animation: runningTime 1s linear 1 forwards;
 }
 @keyframes runningTime{
   from{ width: 100%}
-  to{width: 0}
+  to{width: 0%}
 }
 
 
@@ -303,20 +307,17 @@ header a{
 
 .carousel.prev .thumbnail .item:nth-child(1){
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   animation: showThumbnail .5s linear 1 forwards;
 }
-.carousel.next .arrows button,
-.carousel.prev .arrows button{
-  pointer-events: none;
-}
+
 .carousel.prev .list .item:nth-child(2) .content .author,
 .carousel.prev .list .item:nth-child(2) .content .title,
 .carousel.prev .list .item:nth-child(2) .content .topic,
 .carousel.prev .list .item:nth-child(2) .content .des,
 .carousel.prev .list .item:nth-child(2) .content .buttons
 {
-  animation: contentOut 1.5s linear 1 forwards!important;
+  animation: contentOut 1s linear 1 forwards!important;
 }
 
 @keyframes contentOut{

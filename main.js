@@ -8,7 +8,7 @@ const data = [
 ];
   
   const thumbnail = document.querySelector('.thumbnail');
-
+  const timeDom = document.querySelector('.time');
   data.forEach(item => {
     const div = document.createElement('div');
     div.className = 'item';
@@ -43,7 +43,6 @@ const data = [
   let carouselDom = document.querySelector('.carousel');
   let listDom = document.querySelector('.carousel .list');
   let thumbnailDom = document.querySelector('.carousel .thumbnail');
-  
   nextBtn.addEventListener("click",()=>{
     showSlider("next");
   });
@@ -52,7 +51,7 @@ const data = [
     showSlider("prev")
   });
 
-  let timeRunning = 1500;
+  let timeRunning = 1000;
   let runTimeOut;
   function showSlider(type){
     let itemSlider = document.querySelectorAll('.carousel .list .item');
@@ -69,8 +68,34 @@ const data = [
     }
 
     clearTimeout(runTimeOut);
+    afficherPourcentageEvolution(timeRunning/1000);
+
     runTimeOut = setTimeout(() => {
         carouselDom.classList.remove('next');
         carouselDom.classList.remove('prev');
     },timeRunning)
   }
+  function afficherPourcentageEvolution(nombreDeSecondes) {
+    let debut = Date.now();
+  
+    function calculerPourcentage() {
+      const tempsEcoule = Date.now() - debut;
+      const pourcentage = Math.min(tempsEcoule / (nombreDeSecondes * 1000) * 100, 100); // Limiter le pourcentage à 100
+      const percent=pourcentage.toFixed(2);
+      console.log('this is the percent',percent);
+      
+      if (pourcentage < 100) {
+        timeDom.style.width=percent.substring(0,2); 
+        requestAnimationFrame(calculerPourcentage); // Continuer à calculer le pourcentage jusqu'à ce qu'il atteigne 100 %
+        nextBtn.disabled=true;
+        prevBtn.disabled=true;
+    }else{
+        timeDom.style.width=percent; 
+        nextBtn.disabled=false;
+        prevBtn.disabled=false;
+      }
+    }
+  
+    requestAnimationFrame(calculerPourcentage);
+  }
+  
